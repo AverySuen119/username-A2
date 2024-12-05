@@ -5,6 +5,13 @@ public class Person {
       private int age;
       private int phoneNumber;
 
+      //构造空参函数
+      public Person(){
+
+      }
+
+
+      //构造包含全部参数的方法
       public Person(String id,String name,String gender,int age,int phoneNumber) {
           this.id = id;
           this.name = name;
