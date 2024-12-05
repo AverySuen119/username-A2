@@ -1,13 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Iterator;
 
 public class Ride implements RideInterface{
     private String rideName;
     private int rideID;
     private int minimumAge;
     private Employee operator;
-    private List<Visitor>queue;
-    private List<Visitor>rideHistory;
+    private Queue<Visitor> queue;
+    private LinkedList<Visitor> rideHistory;
 
     //构造空参方法
     public Ride(){
@@ -20,73 +21,90 @@ public class Ride implements RideInterface{
         this.rideID = rideID;
         this.minimumAge = minimumAge;
         this.operator = new Employee();
-        this.queue = new ArrayList<>();
-        this.rideHistory = new ArrayList<>();
+        this.queue = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
     }
 
-    // 1. 添加游客到队列
+    // 将访客添加到队列
     @Override
     public void addVisitorToQueue(Visitor visitor) {
-        queue.add(visitor);
-        System.out.println(visitor.getName() + " has been added to the queue.");
+        queue.add(visitor);  // 将访客添加到队列的尾部
+        System.out.println(visitor.getName() + " 已被添加到队列中.");
     }
 
-    // 2. 从队列中移除游客
+    // 从队列中移除访客
     @Override
     public void removeVisitorFromQueue(Visitor visitor) {
         if (queue.remove(visitor)) {
-            System.out.println(visitor.getName() + " has been removed from the queue.");
+            System.out.println(visitor.getName() + " 已从队列中移除.");
         } else {
-            System.out.println(visitor.getName() + " is not in the queue.");
+            System.out.println(visitor.getName() + " 不在队列中.");
         }
     }
 
-    // 3. 打印当前排队的游客
+    // 打印队列中的所有访客
     @Override
     public void printQueue() {
-        System.out.println("Current Queue:");
-        for (Visitor visitor : queue) {
-            System.out.println(visitor.getName());
+        System.out.println("当前队列:");
+        if (queue.isEmpty()) {
+            System.out.println("队列中没有访客.");
+        } else {
+            for (Visitor visitor : queue) {
+                System.out.println(visitor.getName());
+            }
         }
     }
 
-    // 4. 执行一个游乐设施的周期
+    // 将访客添加到历史记录中
+    @Override
+    public void addVisitorToHistory(Visitor visitor) {
+        rideHistory.add(visitor);  // 将访客添加到历史记录
+        System.out.println(visitor.getName() + " 已被添加到历史记录中.");
+    }
+
+    // 检查访客是否在历史记录中
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor) {
+        if (rideHistory.contains(visitor)) {
+            System.out.println(visitor.getName() + " 已乘坐过该游乐设施.");
+            return true;
+        } else {
+            System.out.println(visitor.getName() + " 尚未乘坐过该游乐设施.");
+            return false;
+        }
+    }
+
+    // 返回历史记录中访客的数量
+    @Override
+    public int numberOfVisitors() {
+        return rideHistory.size();  // 返回历史记录中访客的数量
+    }
+
+    // 打印历史记录中的所有访客
+    @Override
+    public void printRideHistory() {
+        System.out.println("游乐设施历史记录:");
+        if (rideHistory.isEmpty()) {
+            System.out.println("没有访客乘坐过该游乐设施.");
+        } else {
+            Iterator<Visitor> iterator = rideHistory.iterator();  // 使用迭代器遍历历史记录
+            while (iterator.hasNext()) {
+                Visitor visitor = iterator.next();
+                System.out.println(visitor);
+            }
+        }
+    }
+
+    // 模拟运行一次游乐设施
     @Override
     public void runOneCycle() {
         if (!queue.isEmpty()) {
-            Visitor visitor = queue.remove(0); // 假设一个周期内，第一个游客体验游乐设施
-            System.out.println(visitor.getName() + " is now riding the " + rideName);
-            addVisitorToHistory(visitor); // 记录游客进入历史记录
+            Visitor visitor = queue.remove();  // 移除队列中的第一个访客
+            addVisitorToHistory(visitor);  // 将其添加到历史记录
+            System.out.println(visitor.getName() + " 正在乘坐 " + rideName + " 游乐设施.");
         }
     }
 
-    // 5. 将游客添加到游乐设施历史记录
-    @Override
-    public void addVisitorToHistory(Visitor visitor) {
-        rideHistory.add(visitor);
-        System.out.println(visitor.getName() + " has been added to the ride history.");
-    }
-
-    // 6. 检查游客是否已在历史记录中
-    @Override
-    public boolean checkVisitorFromHistory(Visitor visitor) {
-        return rideHistory.contains(visitor);
-    }
-
-    // 7. 获取历史记录中的游客数量
-    @Override
-    public int numberOfVisitors() {
-        return rideHistory.size();
-    }
-
-    // 8. 打印游乐设施的历史记录
-    @Override
-    public void printHistory() {
-        System.out.println("Ride History:");
-        for (Visitor visitor : rideHistory) {
-            System.out.println(visitor.getName());
-        }
-    }
     //get and set
     public String getRideName() {
         return rideName;
