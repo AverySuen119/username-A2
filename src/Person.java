@@ -1,4 +1,4 @@
-public class Person {
+public abstract class Person {
       private String id;
       private String name;
       private String gender;
@@ -57,7 +57,7 @@ public class Person {
 
       @Override
       public String toString(){
-          return "ID: "+id+" Name: "+name+" Gender: "+gender+" Age: "+age+" Phone Number: "+phoneNumber;
+          return "ID: "+id+", Name: "+name+", Gender: "+gender+", Age: "+age+", Phone Number: "+phoneNumber;
       }
 
 

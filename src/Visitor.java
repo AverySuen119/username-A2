@@ -1,6 +1,6 @@
 public class Visitor extends Person {
     public int membershipLevel;
-    public int membershipTime;
+    public String membershipTime;
 
     //构造空参方法
     public Visitor() {
@@ -8,7 +8,7 @@ public class Visitor extends Person {
     }
 
     //构造包含全部参数的方法
-    public Visitor(String id,String name,String gender,int age,int phoneNumber,int membershipLevel,int membershipTime){
+    public Visitor(String id,String name,String gender,int age,int phoneNumber,int membershipLevel,String membershipTime){
         super(id,name,gender,age,phoneNumber);
         this.membershipLevel=membershipLevel;
         this.membershipTime=membershipTime;
@@ -22,10 +22,10 @@ public class Visitor extends Person {
     }
 
 
-    public int getMembershipTime() {
+    public String getMembershipTime() {
         return membershipTime;
     }
-    public void setMembershipTime(int membershipTime) {
+    public void setMembershipTime(String membershipTime) {
         this.membershipTime = membershipTime;
     }
 
