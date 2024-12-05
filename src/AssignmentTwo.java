@@ -21,7 +21,7 @@ public class AssignmentTwo {
         Visitor visitor5 = new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years");
 
         Employee operator = new Employee();
-        Ride ride = new Ride("Roller Coaster", 7, 13, operator);
+        Ride ride = new Ride("Roller Coaster", 7, 13, operator,20,5);
 
 
 // 将游客添加到队列中
@@ -36,6 +36,7 @@ public class AssignmentTwo {
         ride.removeVisitorFromQueue(visitor3);
 
         ride.printQueue();
+        System.out.println("\n--------------------------------------------");
     }
 
     public void partFourA(){
@@ -47,34 +48,35 @@ public class AssignmentTwo {
 
         Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
         Employee operator2 =new Employee("E563","Peter","Male",38,7384920,"Operator","5 Years","Thunder Storm");
-        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator1);
-        Ride  thunderStorm = new Ride("Thunder Storm", 5, 15, operator2);
+        Ride  ride = new Ride("Roller Coaster", 7, 13, operator1,20,9);
 
-        rollerCoaster.addVisitorToQueue(visitor1);
-        rollerCoaster.addVisitorToQueue(visitor2);
-        rollerCoaster.addVisitorToQueue(visitor3);
-        rollerCoaster.addVisitorToQueue(visitor4);
-        rollerCoaster.addVisitorToQueue(visitor5);
+
+        ride.addVisitorToQueue(visitor1);
+        ride.addVisitorToQueue(visitor2);
+        ride.addVisitorToQueue(visitor3);
+        ride.addVisitorToQueue(visitor4);
+        ride.addVisitorToQueue(visitor5);
 
         // 执行一次游乐设施
-        rollerCoaster.runOneCycle();
+        ride.runOneCycle();
 
         // 检查访客是否在历史记录中
-        rollerCoaster.checkVisitorFromHistory(visitor1);
-        rollerCoaster.checkVisitorFromHistory(visitor2);
+        ride.checkVisitorFromHistory(visitor1);
+        ride.checkVisitorFromHistory(visitor2);
 
         // 打印历史记录中的访客
-        rollerCoaster.printRideHistory();
+        ride.printRideHistory();
 
         // 打印历史记录中的访客数量
-        System.out.println("乘坐过游乐设施的访客数量: " + rollerCoaster.numberOfVisitors());
+        System.out.println("乘坐过游乐设施的访客数量: " + ride.numberOfVisitors());
+        System.out.println("\n--------------------------------------------");
 
     }
 
 
     public void partFourB(){
         Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
-        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator1);
+        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator1,20,9);
 
         rollerCoaster.addVisitorToHistory(new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years"));
         rollerCoaster.addVisitorToHistory(new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years"));
@@ -82,11 +84,6 @@ public class AssignmentTwo {
         rollerCoaster.addVisitorToHistory(new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years"));
         rollerCoaster.addVisitorToHistory(new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years"));
 
-        Visitor visitor1 = new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years");
-        Visitor visitor2 = new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years");
-        Visitor visitor3 = new Visitor("V124", "Kristien", "Male", 25, 7466534, 6, "4 Years");
-        Visitor visitor4 = new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years");
-        Visitor visitor5 = new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years");
 
 
         System.out.println("未排序的访客：");
@@ -98,11 +95,56 @@ public class AssignmentTwo {
         // 打印所有访客（排序后）
         System.out.println("\n排序后的访客：");
         rollerCoaster.printRideHistory();
+        System.out.println("\n--------------------------------------------");
 
     }
     public void partFive(){
+        Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
+        Employee operator2 =new Employee("E563","Peter","Male",38,7384920,"Operator","5 Years","Thunder Storm");
+        Ride  ride = new Ride("Thunder Storm", 5, 15, operator2,23,5);
+
+        Visitor visitor1 = new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years");
+        Visitor visitor2 = new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years");
+        Visitor visitor3 = new Visitor("V124", "Kristien", "Male", 25, 7466534, 6, "4 Years");
+        Visitor visitor4 = new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years");
+        Visitor visitor5 = new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years");
+
+        ride.addVisitorToQueue(visitor1);
+        ride.addVisitorToQueue(visitor2);
+        ride.addVisitorToQueue(visitor3);
+        ride.addVisitorToQueue(visitor4);
+        ride.addVisitorToQueue(visitor5);
+
+        // 打印队列中的所有访客
+        ride.printQueue();
+
+        // 运行一次周期
+        ride.runOneCycle();
+
+        // 打印队列中的访客
+        ride.printQueue();
+
+        // 打印所有历史记录中的访客
+        ride.printRideHistory();
+        System.out.println("\n--------------------------------------------");
     }
+
     public void partSix(){
+        Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
+        Employee operator2 =new Employee("E563","Peter","Male",38,7384920,"Operator","5 Years","Thunder Storm");
+        Ride  ride = new Ride("Roller Coaster", 7, 13, operator1,20,9);
+
+        ride.addVisitorToHistory(new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years"));
+        ride.addVisitorToHistory(new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years"));
+        ride.addVisitorToHistory(new Visitor("V124", "Kristien", "Male", 25, 7466534, 6, "4 Years"));
+        ride.addVisitorToHistory(new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years"));
+        ride.addVisitorToHistory(new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years"));
+
+        ride.exportRideHistory("ride_history.csv");
+        System.out.println("\n--------------------------------------------");
+
+
+
     }
     public void partSeven(){
     }

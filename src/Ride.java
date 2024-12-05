@@ -2,6 +2,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Iterator;
 import java.util.Collections;
+import java.io.*;
+import java.util.*;
+
 
     public class Ride implements RideInterface {
         private String rideName;
@@ -10,6 +13,8 @@ import java.util.Collections;
         private Employee operator;
         private Queue<Visitor> queue;
         private LinkedList<Visitor> rideHistory;
+        private int maxPlayer;  // 一次最多接待多少访客
+        private int numOfCycles;
 
         //构造空参方法
         public Ride() {
@@ -18,13 +23,15 @@ import java.util.Collections;
         }
 
         //构造包含全部参数的方法
-        public Ride(String rideName, int rideID, int minimumAge, Employee operator) {
+        public Ride(String rideName, int rideID, int minimumAge, Employee operator, int maxPlayer, int numOfCycles) {
             this.rideName = rideName;
             this.rideID = rideID;
             this.minimumAge = minimumAge;
             this.operator = operator;
             this.queue = new LinkedList<>();
             this.rideHistory = new LinkedList<>();
+            this.maxPlayer = maxPlayer;
+            this.numOfCycles = 0;
         }
 
         // 将访客添加到队列
@@ -100,11 +107,28 @@ import java.util.Collections;
         // 模拟运行一次游乐设施
         @Override
         public void runOneCycle() {
-            if (!queue.isEmpty()) {
-                Visitor visitor = queue.remove();  // 移除队列中的第一个访客
+            if (operator == null) {
+                System.out.println("没有操作员，游乐设施无法运行.");
+                return;
+            }
+
+            if (queue.isEmpty()) {
+                System.out.println("队列为空，无法运行游乐设施.");
+                return;
+            }
+
+            // 运行周期，最多接待 maxRider 个访客
+            int riders = 0;
+            while (!queue.isEmpty() && riders < maxPlayer) {
+                Visitor visitor = queue.remove();  // 从队列中移除访客
                 addVisitorToHistory(visitor);  // 将其添加到历史记录
                 System.out.println(visitor.getName() + " 正在乘坐 " + rideName + " 游乐设施.");
+                riders++;
             }
+
+            numOfCycles++;  // 每次运行周期时增加周期数
+            System.out.println("游乐设施运行完毕，本次已接待 " + riders + " 名访客。");
+            System.out.println("当前运行周期数：" + numOfCycles);
         }
 
         // 排序访客历史记录
@@ -113,6 +137,34 @@ import java.util.Collections;
             Collections.sort(rideHistory, new VisitorComparator());
             System.out.println("历史记录已根据规则排序。");
         }
+
+        public void exportRideHistory(String fileName) {
+            BufferedWriter writer = null;
+            try {
+                // 创建文件写入流
+                writer = new BufferedWriter(new FileWriter(fileName));
+
+                // 遍历历史记录中的所有访客
+                for (Visitor visitor : rideHistory) {
+                    // 将访客的信息转换成 CSV 格式并写入文件
+                    writer.write(visitor.getName() + "," + visitor.getAge() + "," + visitor.getMembershipLevel());
+                    writer.newLine();  // 每个访客写入后换行
+                }
+                System.out.println("历史记录已成功导出到文件 " + fileName);
+            } catch (IOException e) {
+                System.err.println("导出历史记录时出错: " + e.getMessage());
+            } finally {
+                // 关闭文件写入流
+                try {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    System.err.println("关闭文件时出错: " + e.getMessage());
+                }
+            }
+        }
+
 
         // Getter 和 Setter 方法
 
@@ -146,6 +198,22 @@ import java.util.Collections;
 
         public void setOperator(Employee operator) {
             this.operator = operator;
+        }
+
+        public int getMaxPlayer() {
+            return maxPlayer;
+        }
+
+        public void setMaxPlayer(int maxPlayer) {
+            this.maxPlayer = maxPlayer;
+        }
+
+        public int getNumOfCycles() {
+            return numOfCycles;
+        }
+
+        public void setNumOfCycles(int numOfCycles) {
+            this.numOfCycles = numOfCycles;
         }
 
         @Override
