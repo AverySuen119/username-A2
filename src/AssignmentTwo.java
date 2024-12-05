@@ -45,8 +45,10 @@ public class AssignmentTwo {
         Visitor visitor4 = new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years");
         Visitor visitor5 = new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years");
 
-        Employee operator = new Employee();
-        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator);
+        Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
+        Employee operator2 =new Employee("E563","Peter","Male",38,7384920,"Operator","5 Years","Thunder Storm");
+        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator1);
+        Ride  thunderStorm = new Ride("Thunder Storm", 5, 15, operator2);
 
         rollerCoaster.addVisitorToQueue(visitor1);
         rollerCoaster.addVisitorToQueue(visitor2);
@@ -71,7 +73,14 @@ public class AssignmentTwo {
 
 
     public void partFourB(){
-        Ride rollerCoaster = new Ride();
+        Employee operator1 = new Employee("E223","Harry","Male",30,5563829,"Operator","2 Years","Roller Coaster");
+        Ride  rollerCoaster = new Ride("Roller Coaster", 7, 13, operator1);
+
+        rollerCoaster.addVisitorToHistory(new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years"));
+        rollerCoaster.addVisitorToHistory(new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years"));
+        rollerCoaster.addVisitorToHistory(new Visitor("V124", "Kristien", "Male", 25, 7466534, 6, "4 Years"));
+        rollerCoaster.addVisitorToHistory(new Visitor("V520", "Maggie", "Female", 21, 3529485, 4, "3 Years"));
+        rollerCoaster.addVisitorToHistory(new Visitor("V220", "Joey", "Male", 23, 2145530, 2, "1 Years"));
 
         Visitor visitor1 = new Visitor("V430", "Sherry", "Female", 20, 3348590, 4, "2 Years");
         Visitor visitor2 = new Visitor("V289", "Keren", "Female", 24, 8746373, 1, "1 Years");
