@@ -14,15 +14,15 @@ import java.util.*;
         private Employee inspectors;
         private Queue<Visitor> queue;
         private LinkedList<Visitor> rideHistory;
-        private int maxPlayer;  // 一次最多接待多少访客
+        private int maxPlayer;
         private int numOfCycles;
 
-        //构造空参方法
+        //Construct empty parameter function
         public Ride() {
 
         }
 
-        //构造包含全部参数的方法
+        //Construct a method with all parameters
         public Ride(String rideName, int rideID, int minimumAge, Employee operator,Employee inspectors, int maxPlayer, int numOfCycles) {
             this.rideName = rideName;
             this.rideID = rideID;
@@ -35,29 +35,29 @@ import java.util.*;
             this.numOfCycles = 0;
         }
 
-        // 将访客添加到队列
+        // add visitors into queue
         @Override
         public void addVisitorToQueue(Visitor visitor) {
-            queue.add(visitor);  // 将访客添加到队列的尾部
-            System.out.println(visitor.getName() + " 已被添加到队列中.");
+            queue.add(visitor);  // add visitor to the end of queue
+            System.out.println(visitor.getName() + " has been added to the queue.");
         }
 
-        // 从队列中移除访客
+        // remove queue from queue
         @Override
         public void removeVisitorFromQueue(Visitor visitor) {
             if (queue.remove(visitor)) {
-                System.out.println(visitor.getName() + " 已从队列中移除.");
+                System.out.println(visitor.getName() + " was removed from the queue.");
             } else {
-                System.out.println(visitor.getName() + " 不在队列中.");
+                System.out.println(visitor.getName() + " not in queue.");
             }
         }
 
-        // 打印队列中的所有访客
+        // print all visitors in queue
         @Override
         public void printQueue() {
-            System.out.println("当前队列:");
+            System.out.println("Current queue:");
             if (queue.isEmpty()) {
-                System.out.println("队列中没有访客.");
+                System.out.println("There is no visitor in the queue.");
             } else {
                 for (Visitor visitor : queue) {
                     System.out.println(visitor.getName());
@@ -65,39 +65,39 @@ import java.util.*;
             }
         }
 
-        // 将访客添加到历史记录中
+        // Add visitor to history
         @Override
         public void addVisitorToHistory(Visitor visitor) {
-            rideHistory.add(visitor);  // 将访客添加到历史记录
-            System.out.println(visitor.getName() + " 已被添加到历史记录中.");
+            rideHistory.add(visitor);
+            System.out.println(visitor.getName() + " has been added to the history.");
         }
 
-        // 检查访客是否在历史记录中
+        // Check if the visitor is in the history
         @Override
         public boolean checkVisitorFromHistory(Visitor visitor) {
             if (rideHistory.contains(visitor)) {
-                System.out.println(visitor.getName() + " 已乘坐过该游乐设施.");
+                System.out.println(visitor.getName() + " have ridden this ride");
                 return true;
             } else {
-                System.out.println(visitor.getName() + " 尚未乘坐过该游乐设施.");
+                System.out.println(visitor.getName() + " has not ridden this ride.");
                 return false;
             }
         }
 
-        // 返回历史记录中访客的数量
+        // return the amount of visitor in history
         @Override
         public int numberOfVisitors() {
-            return rideHistory.size();  // 返回历史记录中访客的数量
+            return rideHistory.size();
         }
 
-        // 打印历史记录中的所有访客
+        // print all visitor in history
         @Override
         public void printRideHistory() {
-            System.out.println("游乐设施历史记录:");
+            System.out.println("Ride history:");
             if (rideHistory.isEmpty()) {
-                System.out.println("没有访客乘坐过该游乐设施.");
+                System.out.println("No visitors have ridden this ride.");
             } else {
-                Iterator<Visitor> iterator = rideHistory.iterator();  // 使用迭代器遍历历史记录
+                Iterator<Visitor> iterator = rideHistory.iterator();  // Using iterators to traverse history
                 while (iterator.hasNext()) {
                     Visitor visitor = iterator.next();
                     System.out.println(visitor);
@@ -105,63 +105,63 @@ import java.util.*;
             }
         }
 
-        // 模拟运行一次游乐设施
+        // simulate running a ride
         @Override
         public void runOneCycle() {
             if (operator == null) {
-                System.out.println("没有操作员，游乐设施无法运行.");
+                System.out.println("Rides cannot be run without operators.");
                 return;
             }
 
             if (queue.isEmpty()) {
-                System.out.println("队列为空，无法运行游乐设施.");
+                System.out.println("The queue is empty, rides cannot be run.");
                 return;
             }
 
-            // 运行周期，最多接待 maxRider 个访客
+            // Running cycle, receiving at most maxRider visitors
             int riders = 0;
             while (!queue.isEmpty() && riders < maxPlayer) {
-                Visitor visitor = queue.remove();  // 从队列中移除访客
-                addVisitorToHistory(visitor);  // 将其添加到历史记录
-                System.out.println(visitor.getName() + " 正在乘坐 " + rideName + " 游乐设施.");
+                Visitor visitor = queue.remove();  // remove visitor from queue
+                addVisitorToHistory(visitor);  // add visitor into history
+                System.out.println(visitor.getName() + " is riding " + rideName + " ride.");
                 riders++;
             }
 
-            numOfCycles++;  // 每次运行周期时增加周期数
-            System.out.println("游乐设施运行完毕，本次已接待 " + riders + " 名访客。");
-            System.out.println("当前运行周期数：" + numOfCycles);
+            numOfCycles++;  // Increment the cycle number each time a cycle is run
+            System.out.println("The amusement facilities have been completed and have received " + riders + " numbers。");
+            System.out.println("Current running cycle number:" + numOfCycles);
         }
 
-        // 排序访客历史记录
+        //order the visitor history
         public void sortVisitorsInHistory() {
-            // 使用VisitorComparator进行排序
+            // use VisitorComparator to order
             Collections.sort(rideHistory, new VisitorComparator());
-            System.out.println("历史记录已根据规则排序。");
+            System.out.println("History has been sorted according to the rules。");
         }
 
         public void exportRideHistory(String fileName) {
             BufferedWriter writer = null;
             try {
-                // 创建文件写入流
+                // Create a file writing stream
                 writer = new BufferedWriter(new FileWriter(fileName));
 
-                // 遍历历史记录中的所有访客
+                // Iterate through all visitors in history
                 for (Visitor visitor : rideHistory) {
-                    // 将访客的信息转换成 CSV 格式并写入文件
+                    // Convert visitor information into CSV format and write to a file
                     writer.write(visitor.getName() + "," + visitor.getAge() + "," + visitor.getMembershipLevel());
-                    writer.newLine();  // 每个访客写入后换行
+                    writer.newLine();  // Wrap after each visitor writes
                 }
-                System.out.println("历史记录已成功导出到文件 " + fileName);
+                System.out.println("History successfully exported to file " + fileName);
             } catch (IOException e) {
-                System.err.println("导出历史记录时出错: " + e.getMessage());
+                System.err.println("Error exporting history: " + e.getMessage());
             } finally {
-                // 关闭文件写入流
+                //Close the file writing stream
                 try {
                     if (writer != null) {
                         writer.close();
                     }
                 } catch (IOException e) {
-                    System.err.println("关闭文件时出错: " + e.getMessage());
+                    System.err.println("Error closing file: " + e.getMessage());
                 }
             }
         }
@@ -170,32 +170,32 @@ import java.util.*;
             try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    // 将行数据拆分成字段
-                    String[] data = line.split(",");  // 使用逗号分隔每个字段
+                    // Split row data into fields
+                    String[] data = line.split(",");  // Use commas to separate each field
 
-                    // 处理每个字段，确保没有多余的空格
-                    String id = data[0].trim();  // 访客ID
-                    String name = data[1].trim();  // 姓名
-                    String gender = data[2].trim();  // 性别
-                    int age = Integer.parseInt(data[3].trim());  // 年龄 (整数)
-                    int phoneNumber = Integer.parseInt(data[4].trim());  // 电话号码 (整数)
-                    int membershipLevel = Integer.parseInt(data[5].trim());  // 会员等级 (整数)
-                    String membershipTime = data[6].trim();  // 会员有效期 (字符串)
+                    // Process each field, making sure there are no extra spaces
+                    String id = data[0].trim();
+                    String name = data[1].trim();
+                    String gender = data[2].trim();
+                    int age = Integer.parseInt(data[3].trim());
+                    int phoneNumber = Integer.parseInt(data[4].trim());
+                    int membershipLevel = Integer.parseInt(data[5].trim());
+                    String membershipTime = data[6].trim();
 
-                    // 创建 Visitor 对象并添加到历史记录中
+                    // Create a Visitor object and add it to the history
                     Visitor visitor = new Visitor(id, name, gender, age, phoneNumber, membershipLevel, membershipTime);
-                    addVisitorToHistory(visitor);  // 假设你有这个方法来添加访客到历史记录中
+                    addVisitorToHistory(visitor);
                 }
             } catch (IOException e) {
-                System.out.println("文件读取错误: " + e.getMessage());
+                System.out.println("File read error: " + e.getMessage());
                 e.printStackTrace();
             } catch (NumberFormatException e) {
-                System.out.println("数据格式错误，无法转换数字。请检查文件中的数据格式。");
+                System.out.println("The data format is wrong and the number cannot be converted. Please check the data format in the file.");
                 e.printStackTrace();
             }
         }
 
-        // Getter 和 Setter 方法
+        // Getter and Setter
 
         public String getRideName() {
             return rideName;

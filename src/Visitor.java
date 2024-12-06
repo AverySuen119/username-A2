@@ -2,12 +2,12 @@ public class Visitor extends Person {
     public int membershipLevel;
     public String membershipTime;
 
-    //构造空参方法
+    //Construct empty parameter function
     public Visitor() {
 
     }
 
-    //构造包含全部参数的方法
+    //Construct a method with all parameters
     public Visitor(String id,String name,String gender,int age,int phoneNumber,int membershipLevel,String membershipTime){
         super(id,name,gender,age,phoneNumber);
         this.membershipLevel=membershipLevel;

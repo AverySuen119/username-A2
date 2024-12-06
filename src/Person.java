@@ -5,13 +5,13 @@ public abstract class Person {
       private int age;
       private int phoneNumber;
 
-      //构造空参函数
+      //Construct empty parameter function
       public Person(){
 
       }
 
 
-      //构造包含全部参数的方法
+      //Construct a method with all parameters
       public Person(String id,String name,String gender,int age,int phoneNumber) {
           this.id = id;
           this.name = name;
@@ -20,6 +20,8 @@ public abstract class Person {
           this.phoneNumber = phoneNumber;
       }
 
+
+      //get and set
       public String getId() {
           return id;
       }

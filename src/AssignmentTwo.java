@@ -71,7 +71,7 @@ public class AssignmentTwo {
         ride.printRideHistory();
 
         // Print the number of visitors in the history
-        System.out.println("乘坐过游乐设施的访客数量: " + ride.numberOfVisitors());
+        System.out.println("Number of visitors who rode the ride: " + ride.numberOfVisitors());
         System.out.println("\n--------------------------------------------");
 
     }
@@ -91,14 +91,14 @@ public class AssignmentTwo {
 
 
 
-        System.out.println("未排序的访客：");
+        System.out.println("Unsorted visitors：");
         rollerCoaster.printRideHistory();
 
-        // 对访客进行排序
+        // Sort visitors
         rollerCoaster.sortVisitorsInHistory();
 
-        // 打印所有访客（排序后）
-        System.out.println("\n排序后的访客：");
+        // Print all visitors (sorted)
+        System.out.println("\nSorted visitors：");
         rollerCoaster.printRideHistory();
         System.out.println("\n--------------------------------------------");
 
@@ -130,16 +130,16 @@ public class AssignmentTwo {
         ride.addVisitorToQueue(visitor9);
         ride.addVisitorToQueue(visitor10);
 
-        // 打印队列中的所有访客
+        // Print all visitors in the queue
         ride.printQueue();
 
-        // 运行一次周期
+        // Run a cycle
         ride.runOneCycle();
 
-        // 打印队列中的访客
+        // Print the guests in the queue
         ride.printQueue();
 
-        // 打印所有历史记录中的访客
+        // Print all guests in the history
         ride.printRideHistory();
         System.out.println("\n--------------------------------------------");
     }
@@ -170,13 +170,13 @@ public class AssignmentTwo {
 
         String filename = "ride_history.txt";
 
-        // 导入历史记录
+        // Import history
         ride.importRideHistory(filename);
 
-        // 打印历史记录中的访客数量
+        // Print number of guests in the history
         System.out.println("导入的访客数量: " + ride.numberOfVisitors());
 
-        // 打印所有导入的访客信息
+        // Print all imported guest information
         ride.printRideHistory();
     }
 }

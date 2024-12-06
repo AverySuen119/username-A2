@@ -2,13 +2,13 @@ public class Employee extends Person {
     private String workType;
     private String workLength;
     private String responsibilityRide;
-    //构造空参方法
+    //Construct empty parameter function
     public Employee(){
 
     }
 
 
-    //构造包含全部参数的函数
+    //Construct a method with all parameters
     public Employee(String id,String name,String gender,int age,int phoneNumber,String workType,String workLength,String responsibilityRide) {
         super(id,name,gender,age,phoneNumber);
         this.workType = workType;
