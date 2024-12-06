@@ -11,6 +11,7 @@ import java.util.*;
         private int rideID;
         private int minimumAge;
         private Employee operator;
+        private Employee inspectors;
         private Queue<Visitor> queue;
         private LinkedList<Visitor> rideHistory;
         private int maxPlayer;  // 一次最多接待多少访客
@@ -18,16 +19,16 @@ import java.util.*;
 
         //构造空参方法
         public Ride() {
-            this.queue = new LinkedList<>();
-            this.rideHistory = new LinkedList<>();
+
         }
 
         //构造包含全部参数的方法
-        public Ride(String rideName, int rideID, int minimumAge, Employee operator, int maxPlayer, int numOfCycles) {
+        public Ride(String rideName, int rideID, int minimumAge, Employee operator,Employee inspectors, int maxPlayer, int numOfCycles) {
             this.rideName = rideName;
             this.rideID = rideID;
             this.minimumAge = minimumAge;
             this.operator = operator;
+            this.inspectors = inspectors;
             this.queue = new LinkedList<>();
             this.rideHistory = new LinkedList<>();
             this.maxPlayer = maxPlayer;
@@ -165,6 +166,34 @@ import java.util.*;
             }
         }
 
+        public void importRideHistory(String filename) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    // 将行数据拆分成字段
+                    String[] data = line.split(",");  // 使用逗号分隔每个字段
+
+                    // 处理每个字段，确保没有多余的空格
+                    String id = data[0].trim();  // 访客ID
+                    String name = data[1].trim();  // 姓名
+                    String gender = data[2].trim();  // 性别
+                    int age = Integer.parseInt(data[3].trim());  // 年龄 (整数)
+                    int phoneNumber = Integer.parseInt(data[4].trim());  // 电话号码 (整数)
+                    int membershipLevel = Integer.parseInt(data[5].trim());  // 会员等级 (整数)
+                    String membershipTime = data[6].trim();  // 会员有效期 (字符串)
+
+                    // 创建 Visitor 对象并添加到历史记录中
+                    Visitor visitor = new Visitor(id, name, gender, age, phoneNumber, membershipLevel, membershipTime);
+                    addVisitorToHistory(visitor);  // 假设你有这个方法来添加访客到历史记录中
+                }
+            } catch (IOException e) {
+                System.out.println("文件读取错误: " + e.getMessage());
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                System.out.println("数据格式错误，无法转换数字。请检查文件中的数据格式。");
+                e.printStackTrace();
+            }
+        }
 
         // Getter 和 Setter 方法
 
@@ -195,10 +224,17 @@ import java.util.*;
         public Employee getOperator() {
             return operator;
         }
-
         public void setOperator(Employee operator) {
             this.operator = operator;
         }
+
+        public Employee getInspectors() {
+            return inspectors;
+        }
+        public void setInspectors(Employee inspectors) {
+            this.inspectors = inspectors;
+        }
+
 
         public int getMaxPlayer() {
             return maxPlayer;
@@ -218,6 +254,6 @@ import java.util.*;
 
         @Override
         public String toString() {
-            return "Ride Name: " + rideName + ", Ride ID: " + rideID + ", Minimum Age: " + minimumAge + ", Operator: " + operator;
+            return "Ride Name: " + rideName + ", Ride ID: " + rideID + ", Minimum Age: " + minimumAge + ", Operator: " + operator + ", Inspectors: " + inspectors + ", Max Player: " + maxPlayer;
         }
     }
